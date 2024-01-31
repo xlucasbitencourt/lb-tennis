@@ -13,12 +13,12 @@ const App = () => {
 
   const updatePoint = (player) => {
     if (player === 1) {
+      if (player2Game === 6 && player1Game === 6) {
+        tieBreak(1);
+        return;
+      }
       switch (player1Point) {
         case "0":
-          if (player2Game === 6 && player1Game === 6) {
-            tieBreak(1);
-            break;
-          }
           setPlayer1Point("15");
           break;
         case "15":
@@ -48,17 +48,17 @@ const App = () => {
           updateGame(1);
           break;
         default:
-          tieBreak(1);
+          setPlayer1Point("error");
           break;
       }
     }
     if (player === 2) {
+      if (player2Game === 6 && player1Game === 6) {
+        tieBreak(2);
+        return;
+      }
       switch (player2Point) {
         case "0":
-          if (player2Game === 6 && player1Game === 6) {
-            tieBreak(2);
-            break;
-          }
           setPlayer2Point("15");
           break;
         case "15":
@@ -88,7 +88,7 @@ const App = () => {
           updateGame(2);
           break;
         default:
-          tieBreak(2);
+          setPlayer2Point("error");
           break;
       }
     }
@@ -96,7 +96,7 @@ const App = () => {
 
   const tieBreak = (player) => {
     if (player === 1) {
-      if (player1Point >= "6") {
+      if (Number(player1Point) >= 6) {
         if (Number(player1Point) - Number(player2Point) >= 1) {
           updateGame(1);
           setPlayer1Point("0");
@@ -105,7 +105,7 @@ const App = () => {
       } else setPlayer1Point((Number(player1Point) + 1).toString());
     }
     if (player === 2) {
-      if (player2Point >= "6") {
+      if (Number(player2Point) >= 6) {
         if (Number(player2Point) - Number(player1Point) >= 1) {
           updateGame(2);
           setPlayer1Point("0");
