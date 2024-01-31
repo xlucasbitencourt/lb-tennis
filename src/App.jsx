@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import "./App.css";
 
 const App = () => {
+  const ADD_POINT = "Add Point";
+  const RESET_POINT = "Reset point score";
+  const RESET_GAME = "Reset game score";
+  const RESET_SET = "Reset set score";
+  const CHANGE_NAME = "Change Player Name";
+
   const [player1Point, setPlayer1Point] = useState("0");
   const [player2Point, setPlayer2Point] = useState("0");
   const [player1Game, setPlayer1Game] = useState(0);
@@ -10,6 +16,8 @@ const App = () => {
   const [player2Set, setPlayer2Set] = useState(0);
   const [player1Name, setPlayer1Name] = useState("Player 1");
   const [player2Name, setPlayer2Name] = useState("Player 2");
+  const [changePlayer1, setChangePlayer1] = useState(false);
+  const [changePlayer2, setChangePlayer2] = useState(false);
 
   const updatePoint = (player) => {
     if (player === 1) {
@@ -163,30 +171,52 @@ const App = () => {
       <h1>Tennis Score Tracker</h1>
       <div className="score-container">
         <div className="player-container">
-          <h1>{player1Name}</h1>
+          {!changePlayer1 && <h1>{player1Name}</h1>}
+          {changePlayer1 && (
+            <input
+              type="text"
+              value={player1Name}
+              onChange={(e) => setPlayer1Name(e.target.value)}
+            />
+          )}
           <h2>{`Sets: ${player1Set}`}</h2>
           <h2>{`Games: ${player1Game}`}</h2>
           <h1>{`Points: ${player1Point}`}</h1>
-          <button onClick={() => updatePoint(1)}>Add Point</button>
+          <button onClick={() => updatePoint(1)}>{ADD_POINT}</button>
           <br />
-          <button onClick={() => setPlayer1Point("0")}>Reset point score</button>
+          <button onClick={() => setPlayer1Point("0")}>{RESET_POINT}</button>
           <br />
-          <button onClick={() => setPlayer1Game(0)}>Reset game score</button>
+          <button onClick={() => setPlayer1Game(0)}>{RESET_GAME}</button>
           <br />
-          <button onClick={() => setPlayer1Set(0)}>Reset set score</button>
+          <button onClick={() => setPlayer1Set(0)}>{RESET_SET}</button>
+          <br />
+          <button onClick={() => setChangePlayer1(!changePlayer1)}>
+            {CHANGE_NAME}
+          </button>
         </div>
         <div className="player-container">
-          <h1>{player2Name}</h1>
+          {!changePlayer2 && <h1>{player2Name}</h1>}
+          {changePlayer2 && (
+            <input
+              type="text"
+              value={player2Name}
+              onChange={(e) => setPlayer2Name(e.target.value)}
+            />
+          )}
           <h2>{`Sets: ${player2Set}`}</h2>
           <h2>{`Games: ${player2Game}`}</h2>
           <h1>{`Points: ${player2Point}`}</h1>
-          <button onClick={() => updatePoint(2)}>Add Point</button>
+          <button onClick={() => updatePoint(2)}>{ADD_POINT}</button>
           <br />
-          <button onClick={() => setPlayer2Point("0")}>Reset point score</button>
+          <button onClick={() => setPlayer2Point("0")}>{RESET_POINT}</button>
           <br />
-          <button onClick={() => setPlayer2Game(0)}>Reset game score</button>
+          <button onClick={() => setPlayer2Game(0)}>{RESET_GAME}</button>
           <br />
-          <button onClick={() => setPlayer2Set(0)}>Reset set score</button>
+          <button onClick={() => setPlayer2Set(0)}>{RESET_SET}</button>
+          <br />
+          <button onClick={() => setChangePlayer2(!changePlayer2)}>
+            {CHANGE_NAME}
+          </button>
         </div>
       </div>
     </div>
