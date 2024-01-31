@@ -7,6 +7,7 @@ const App = () => {
   const RESET_GAME = "Reset game score";
   const RESET_SET = "Reset set score";
   const CHANGE_NAME = "Change Player Name";
+  const CONFIRM = "Confirm";
 
   const [player1Point, setPlayer1Point] = useState("0");
   const [player2Point, setPlayer2Point] = useState("0");
@@ -173,11 +174,14 @@ const App = () => {
         <div className="player-container">
           {!changePlayer1 && <h1>{player1Name}</h1>}
           {changePlayer1 && (
+            <>
             <input
               type="text"
               value={player1Name}
               onChange={(e) => setPlayer1Name(e.target.value)}
             />
+            <button onClick={() => setChangePlayer1(false)}>{CONFIRM}</button>
+            </>
           )}
           <h2>{`Sets: ${player1Set}`}</h2>
           <h2>{`Games: ${player1Game}`}</h2>
@@ -190,18 +194,21 @@ const App = () => {
           <br />
           <button onClick={() => setPlayer1Set(0)}>{RESET_SET}</button>
           <br />
-          <button onClick={() => setChangePlayer1(!changePlayer1)}>
-            {CHANGE_NAME}
-          </button>
+          {!changePlayer1 && (
+            <button onClick={() => setChangePlayer1(true)}>{CHANGE_NAME}</button>
+          )}
         </div>
         <div className="player-container">
           {!changePlayer2 && <h1>{player2Name}</h1>}
           {changePlayer2 && (
-            <input
-              type="text"
-              value={player2Name}
-              onChange={(e) => setPlayer2Name(e.target.value)}
-            />
+            <>
+              <input
+                type="text"
+                value={player2Name}
+                onChange={(e) => setPlayer2Name(e.target.value)}
+              />
+              <button onClick={() => setChangePlayer2(false)}>{CONFIRM}</button>
+            </>
           )}
           <h2>{`Sets: ${player2Set}`}</h2>
           <h2>{`Games: ${player2Game}`}</h2>
@@ -214,9 +221,9 @@ const App = () => {
           <br />
           <button onClick={() => setPlayer2Set(0)}>{RESET_SET}</button>
           <br />
-          <button onClick={() => setChangePlayer2(!changePlayer2)}>
-            {CHANGE_NAME}
-          </button>
+          {!changePlayer2 && (
+            <button onClick={() => setChangePlayer2(true)}>{CHANGE_NAME}</button>
+          )}
         </div>
       </div>
     </div>
