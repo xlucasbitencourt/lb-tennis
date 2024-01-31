@@ -135,6 +135,7 @@ const App = () => {
       <div className="score-container">
         <div className="player-container">
           <h2>{player1Name}</h2>
+          <h3>{`Sets: ${player1Set}`}</h3>
           <h3>{`Games: ${player1Game}`}</h3>
           <h3>{`Points: ${player1Point}`}</h3>
           <button onClick={() => updatePoint(1)}>Add Point</button>
@@ -142,9 +143,12 @@ const App = () => {
           <button onClick={() => setPlayer1Point("0")}>Reset point score</button>
           <br />
           <button onClick={() => setPlayer1Game(0)}>Reset game score</button>
+          <br />
+          <button onClick={() => setPlayer1Set(0)}>Reset set score</button>
         </div>
         <div className="player-container">
           <h2>{player2Name}</h2>
+          <h3>{`Sets: ${player2Set}`}</h3>
           <h3>{`Games: ${player2Game}`}</h3>
           <h3>{`Points: ${player2Point}`}</h3>
           <button onClick={() => updatePoint(2)}>Add Point</button>
@@ -152,6 +156,8 @@ const App = () => {
           <button onClick={() => setPlayer2Point("0")}>Reset point score</button>
           <br />
           <button onClick={() => setPlayer1Game(0)}>Reset game score</button>
+          <br />
+          <button onClick={() => setPlayer2Set(0)}>Reset set score</button>
         </div>
       </div>
     </div>
