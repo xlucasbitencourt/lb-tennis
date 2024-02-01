@@ -9,6 +9,8 @@ const App = () => {
   const CHANGE_NAME = "Change Player Name";
   const CONFIRM = "Confirm";
 
+  const [sets, setSets] = useState(3);
+  const [editSets, setEditSets] = useState(false);
   const [player1Point, setPlayer1Point] = useState("0");
   const [player2Point, setPlayer2Point] = useState("0");
   const [player1Game, setPlayer1Game] = useState(0);
@@ -19,6 +21,17 @@ const App = () => {
   const [player2Name, setPlayer2Name] = useState("Player 2");
   const [changePlayer1, setChangePlayer1] = useState(false);
   const [changePlayer2, setChangePlayer2] = useState(false);
+  const [player1win, setPlayer1win] = useState(false);
+  const [player2win, setPlayer2win] = useState(false);
+
+  const changeSets = (value) => {
+    if (value === "-") {
+      if (sets >= 3) setSets(sets - 2);
+    }
+    if (value === "+") {
+      if (sets <= 3) setSets(sets + 2);
+    }
+  };
 
   const updatePoint = (player) => {
     if (player === 1) {
@@ -132,14 +145,14 @@ const App = () => {
           else {
             setPlayer1Game(0);
             setPlayer2Game(0);
-            setPlayer1Set(player1Set + 1);
+            updateSet(1);
             break score1;
           }
         }
         if (player1Game === 6) {
           setPlayer1Game(0);
           setPlayer2Game(0);
-          setPlayer1Set(player1Set + 1);
+          updateSet(1);
           break score1;
         }
         setPlayer1Game(player1Game + 1);
@@ -152,14 +165,14 @@ const App = () => {
           else {
             setPlayer1Game(0);
             setPlayer2Game(0);
-            setPlayer2Set(player2Set + 1);
+            updateSet(2);
             break score2;
           }
         }
         if (player2Game === 6) {
           setPlayer1Game(0);
           setPlayer2Game(0);
-          setPlayer2Set(player2Set + 1);
+          updateSet(2);
           break score2;
         }
         setPlayer2Game(player2Game + 1);
@@ -167,20 +180,73 @@ const App = () => {
     }
   };
 
+  const updateSet = (player) => {
+    if (player === 1) {
+      setPlayer1Set(player1Set + 1);
+      switch (sets) {
+        case 1:
+          setPlayer1win(true);
+          break;
+        case 3:
+          if (player1Set === 2) setPlayer1win(true);
+          break;
+        case 5:
+          if (player1Set >= 3) setPlayer1win(true);
+          break;
+        default:
+          break;
+      }
+    }
+    if (player === 2) {
+      setPlayer2Set(player2Set + 1);
+      switch (sets) {
+        case 1:
+          setPlayer2win(true);
+          break;
+        case 3:
+          if (player2Set >= 2) setPlayer2win(true);
+          break;
+        case 5:
+          if (player2Set >= 3) setPlayer2win(true);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   return (
     <div className="app-container">
       <h1>Tennis Score Tracker</h1>
+        {player1win &&(
+            <>
+            <h1>{`${player1Name} wins!`}</h1>
+            <button onClick={() => window.location.reload()}>Restart</button>
+            </>
+        )}
+      <h1>{`Sets: ${sets}`}</h1>
+      {editSets && (
+        <div>
+          {sets >= 3 && <button onClick={() => changeSets("-")}>-</button>}
+          <span> </span>
+          {sets <= 3 && <button onClick={() => changeSets("+")}>+</button>}
+        </div>
+      )}
+      <br />
+      <button onClick={() => setEditSets(!editSets)}>
+        {editSets ? "Confirm" : "Edit Sets"}
+      </button>
       <div className="score-container">
         <div className="player-container">
           {!changePlayer1 && <h1>{player1Name}</h1>}
           {changePlayer1 && (
             <>
-            <input
-              type="text"
-              value={player1Name}
-              onChange={(e) => setPlayer1Name(e.target.value)}
-            />
-            <button onClick={() => setChangePlayer1(false)}>{CONFIRM}</button>
+              <input
+                type="text"
+                value={player1Name}
+                onChange={(e) => setPlayer1Name(e.target.value)}
+              />
+              <button onClick={() => setChangePlayer1(false)}>{CONFIRM}</button>
             </>
           )}
           <h2>{`Sets: ${player1Set}`}</h2>
