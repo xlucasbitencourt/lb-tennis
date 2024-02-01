@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const App = () => {
@@ -25,6 +25,7 @@ const App = () => {
   const [changePlayer2, setChangePlayer2] = useState(false);
   const [player1win, setPlayer1win] = useState(false);
   const [player2win, setPlayer2win] = useState(false);
+  const [lastPoint, setLastPoint] = useState("");
 
   useEffect(() => {
     const checkWinner = () => {
@@ -59,6 +60,7 @@ const App = () => {
 
   const updatePoint = (player) => {
     if (player === 1) {
+      setLastPoint(player1Name);
       if (player2Game === 6 && player1Game === 6) {
         tieBreak(1);
         return;
@@ -99,6 +101,7 @@ const App = () => {
       }
     }
     if (player === 2) {
+      setLastPoint(player2Name);
       if (player2Game === 6 && player1Game === 6) {
         tieBreak(2);
         return;
@@ -222,6 +225,7 @@ const App = () => {
     setPlayer2Set(0);
     setPlayer1win(false);
     setPlayer2win(false);
+    setLastPoint("");
   };
 
   return (
@@ -253,6 +257,9 @@ const App = () => {
           <button onClick={() => setEditSets(!editSets)}>
             {editSets ? CONFIRM : EDIT_SETS}
           </button>
+          {
+            lastPoint && <h2>{`Last point: ${lastPoint}`}</h2>
+          }
           <div className="score-container">
             <div className="player-container">
               {!changePlayer1 && <h1>{player1Name}</h1>}
