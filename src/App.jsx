@@ -28,6 +28,15 @@ const App = () => {
   const [lastPoint, setLastPoint] = useState("");
 
   useEffect(() => {
+    const disableEdit = () => {
+      setEditSets(false);
+      setChangePlayer1(false);
+      setChangePlayer2(false);
+    };
+    disableEdit();
+  }, [player1Point, player2Point, player1Game, player2Game, player1Set, player2Set]);
+
+  useEffect(() => {
     const checkWinner = () => {
       switch (sets) {
         case 1:
@@ -248,18 +257,27 @@ const App = () => {
           <h1>{`Sets: ${sets}`}</h1>
           {editSets && (
             <div>
-              {sets >= 3 && <button className="add-point reset-point" onClick={() => changeSets("-")}>-</button>}
+              {sets >= 3 && (
+                <button className="add-point reset-point" onClick={() => changeSets("-")}>
+                  -
+                </button>
+              )}
               <span> </span>
-              {sets <= 3 && <button className="add-point reset-point" onClick={() => changeSets("+")}>+</button>}
+              {sets <= 3 && (
+                <button className="add-point reset-point" onClick={() => changeSets("+")}>
+                  +
+                </button>
+              )}
             </div>
           )}
           <br />
-          <button className="add-point reset-point" onClick={() => setEditSets(!editSets)}>
+          <button
+            className="add-point reset-point"
+            onClick={() => setEditSets(!editSets)}
+          >
             {editSets ? CONFIRM : EDIT_SETS}
           </button>
-          {
-            lastPoint && <h2>{`Last point: ${lastPoint}`}</h2>
-          }
+          {lastPoint && <h2>{`Last point: ${lastPoint}`}</h2>}
           <div className="score-container">
             <div className="player-container">
               {!changePlayer1 && <h1>{player1Name}</h1>}
@@ -270,22 +288,43 @@ const App = () => {
                     value={player1Name}
                     onChange={(e) => setPlayer1Name(e.target.value)}
                   />
-                  <button className="add-point reset-point" onClick={() => setChangePlayer1(false)}>{CONFIRM}</button>
+                  <button
+                    className="add-point reset-point"
+                    onClick={() => setChangePlayer1(false)}
+                  >
+                    {CONFIRM}
+                  </button>
                 </>
               )}
               <h2>{`Sets: ${player1Set}`}</h2>
               <h2>{`Games: ${player1Game}`}</h2>
               <h1>{`Points: ${player1Point}`}</h1>
-              <button className="add-point" onClick={() => updatePoint(1)}>{ADD_POINT}</button>
+              <button className="add-point" onClick={() => updatePoint(1)}>
+                {ADD_POINT}
+              </button>
               <br />
-              <button className="add-point reset-point" onClick={() => setPlayer1Point("0")}>{RESET_POINT}</button>
+              <button
+                className="add-point reset-point"
+                onClick={() => setPlayer1Point("0")}
+              >
+                {RESET_POINT}
+              </button>
               <br />
-              <button className="add-point reset-point" onClick={() => setPlayer1Game(0)}>{RESET_GAME}</button>
+              <button className="add-point reset-point" onClick={() => setPlayer1Game(0)}>
+                {RESET_GAME}
+              </button>
               <br />
-              <button className="add-point reset-point" onClick={() => setPlayer1Set(0)}>{RESET_SET}</button>
+              <button className="add-point reset-point" onClick={() => setPlayer1Set(0)}>
+                {RESET_SET}
+              </button>
               <br />
               {!changePlayer1 && (
-                <button className="add-point reset-point" onClick={() => setChangePlayer1(true)}>{CHANGE_NAME}</button>
+                <button
+                  className="add-point reset-point"
+                  onClick={() => setChangePlayer1(true)}
+                >
+                  {CHANGE_NAME}
+                </button>
               )}
             </div>
             <div className="player-container">
@@ -297,22 +336,43 @@ const App = () => {
                     value={player2Name}
                     onChange={(e) => setPlayer2Name(e.target.value)}
                   />
-                  <button className="add-point reset-point" onClick={() => setChangePlayer2(false)}>{CONFIRM}</button>
+                  <button
+                    className="add-point reset-point"
+                    onClick={() => setChangePlayer2(false)}
+                  >
+                    {CONFIRM}
+                  </button>
                 </>
               )}
               <h2>{`Sets: ${player2Set}`}</h2>
               <h2>{`Games: ${player2Game}`}</h2>
               <h1>{`Points: ${player2Point}`}</h1>
-              <button className="add-point" onClick={() => updatePoint(2)}>{ADD_POINT}</button>
+              <button className="add-point" onClick={() => updatePoint(2)}>
+                {ADD_POINT}
+              </button>
               <br />
-              <button className="add-point reset-point" onClick={() => setPlayer2Point("0")}>{RESET_POINT}</button>
+              <button
+                className="add-point reset-point"
+                onClick={() => setPlayer2Point("0")}
+              >
+                {RESET_POINT}
+              </button>
               <br />
-              <button className="add-point reset-point" onClick={() => setPlayer2Game(0)}>{RESET_GAME}</button>
+              <button className="add-point reset-point" onClick={() => setPlayer2Game(0)}>
+                {RESET_GAME}
+              </button>
               <br />
-              <button className="add-point reset-point" onClick={() => setPlayer2Set(0)}>{RESET_SET}</button>
+              <button className="add-point reset-point" onClick={() => setPlayer2Set(0)}>
+                {RESET_SET}
+              </button>
               <br />
               {!changePlayer2 && (
-                <button className="add-point reset-point" onClick={() => setChangePlayer2(true)}>{CHANGE_NAME}</button>
+                <button
+                  className="add-point reset-point"
+                  onClick={() => setChangePlayer2(true)}
+                >
+                  {CHANGE_NAME}
+                </button>
               )}
             </div>
           </div>
