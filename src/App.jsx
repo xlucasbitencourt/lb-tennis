@@ -239,12 +239,12 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1>Tennis Score Tracker</h1>
+      <h2>Tennis Score Tracker by Lucas Bitencourt</h2>
       {player1win && (
-        <>
+        <div className="win">
           <h1>{`${player1Name} wins!`}</h1>
-          <button onClick={resetGame}>{RESTART}</button>
-        </>
+          <button className="add-point" onClick={resetGame}>{RESTART}</button>
+        </div>
       )}
       {player2win && (
         <>
@@ -303,6 +303,8 @@ const App = () => {
                 {ADD_POINT}
               </button>
               <br />
+              <br />
+              <br />
               <button
                 className="add-point reset-point"
                 onClick={() => setPlayer1Point("0")}
@@ -350,6 +352,8 @@ const App = () => {
               <button className="add-point" onClick={() => updatePoint(2)}>
                 {ADD_POINT}
               </button>
+              <br />
+              <br />
               <br />
               <button
                 className="add-point reset-point"
