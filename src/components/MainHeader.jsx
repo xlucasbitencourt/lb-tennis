@@ -1,3 +1,5 @@
+import React from 'react';
+
 function MainHeader() {
   const link = <a href="https://lucasbitencourt.com.br/">Lucas Bitencourt</a>;
   return (
