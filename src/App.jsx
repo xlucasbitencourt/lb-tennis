@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import MainHeader from "./components/MainHeader";
 
 const App = () => {
   const ADD_POINT = "Add Point";
@@ -238,7 +239,7 @@ const App = () => {
   };
 
   return (
-    <div className="app-container">
+      <><MainHeader /><div className="app-container">
       <h2>Tennis Score Tracker by Lucas Bitencourt</h2>
       {player1win && (
         <div className="win">
@@ -286,8 +287,7 @@ const App = () => {
                   <input
                     type="text"
                     value={player1Name}
-                    onChange={(e) => setPlayer1Name(e.target.value)}
-                  />
+                    onChange={(e) => setPlayer1Name(e.target.value)} />
                   <button
                     className="add-point reset-point"
                     onClick={() => setChangePlayer1(false)}
@@ -336,8 +336,7 @@ const App = () => {
                   <input
                     type="text"
                     value={player2Name}
-                    onChange={(e) => setPlayer2Name(e.target.value)}
-                  />
+                    onChange={(e) => setPlayer2Name(e.target.value)} />
                   <button
                     className="add-point reset-point"
                     onClick={() => setChangePlayer2(false)}
@@ -382,7 +381,7 @@ const App = () => {
           </div>
         </>
       )}
-    </div>
+    </div></>
   );
 };
 
